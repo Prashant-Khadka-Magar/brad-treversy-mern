@@ -75,7 +75,13 @@ const loginUser = asyncHandler(async (req, res) => {
 
 //-----------GET USER DETAILS || PRIVATE ROUTE-------
 const getMe = asyncHandler(async (req, res) => {
-  res.json({ message: "GetME User" });
+  const { id, name, email } = await User.findById(req.user.id);
+
+  res.status(200).json({
+    id,
+    name,
+    email,
+  });
 });
 
 //genetrate JWT
