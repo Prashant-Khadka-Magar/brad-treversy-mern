@@ -25,13 +25,18 @@ const setGoal = asyncHandler(async (req, res) => {
 
 //-----------UPDATE GOAL VALUE-------
 const updateGoal = asyncHandler(async (req, res) => {
+
+  //it finds the document with id given in the params
   const goal = await Goal.findById(req.params.id);
 
+  //check if that document exist
   if (!goal) {
     req.status(400);
     throw new Error("Goal not found");
   }
 
+
+  //find the user from databse based on ID 
   const user = await User.findById(req.user.id);
 
   //CHECK for the user
@@ -41,6 +46,7 @@ const updateGoal = asyncHandler(async (req, res) => {
   }
 
   //Make sure the logged in user matches the goal user
+  console.log(goal.user)
   if (goal.user.toString() !== user.id) {
     res.status(401);
     throw new Error("User not authorized");
