@@ -1,9 +1,10 @@
 import axios from "axios";
 
 const API_URL = "/api/goals";
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YThhNjYyODEzNjc3MDE2YjA2OWZiMSIsImlhdCI6MTcwNTY0ODczNywiZXhwIjoxNzA4MjQwNzM3fQ.m67i7nVPqGPeDtCVYRBfYBpfnlbiddubodIS91nDWr8";
+let userToken = localStorage.getItem("user");
+const userObject = JSON.parse(userToken);
 
+const token = userObject.token;
 const addGoals = async (data) => {
   let response = await axios.post(API_URL, data, {
     headers: {
@@ -30,7 +31,7 @@ const deleteGoals = async (id) => {
       Authorization: `Bearer ${token}`,
     },
   });
-  console.log(response.data)
+  console.log(response.data);
   return response.data;
 };
 
