@@ -2,6 +2,7 @@
   "name": "brad-traversy-mern",
   "version": "1.0.0",
   "description": "goal setter app",
+  
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",
