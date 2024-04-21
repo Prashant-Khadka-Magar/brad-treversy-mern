@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
 
 const goalSchema = new mongoose.Schema({
   text: {
@@ -7,11 +7,16 @@ const goalSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // Assuming you have a User model
+    ref: 'User', // Assuming you have a User model
     required: true,
   },
+  postImage: {
+    type: String,
+  },
+}, {
+  timestamps: true,
 });
 
-const Goal = mongoose.model("Goal", goalSchema);
+const Goal = mongoose.model('Goal', goalSchema);
 
-module.exports = Goal;
+export default Goal;

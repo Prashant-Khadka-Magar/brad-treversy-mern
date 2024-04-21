@@ -14,7 +14,8 @@ export const addGoals = createAsyncThunk(
     let formatted = { text: data };
 
     try {
-      return await goalService.addGoals(formatted);
+      const token=thunkAPI.getState().auth.user.token
+      return await goalService.addGoals(formatted,token);
     } catch (error) {
       let message;
       return thunkAPI.rejectWithValue(message);
@@ -27,7 +28,8 @@ export const fetchGoals = createAsyncThunk(
   "goals/fetch",
   async (_, thunkAPI) => {
     try {
-      return await goalService.displayGoals();
+      const token=thunkAPI.getState().auth.user.token
+      return await goalService.displayGoals(token);
     } catch (error) {
       let message;
       return thunkAPI.rejectWithValue(message);
@@ -40,7 +42,8 @@ export const deleteGoals = createAsyncThunk(
   "goals/delete",
   async (id, thunkAPI) => {
     try {
-      return await goalService.deleteGoals(id);
+      const token=thunkAPI.getState().auth.user.token
+      return await goalService.deleteGoals(id,token);
     } catch (error) {
       let message;
       return thunkAPI.rejectWithValue(message);

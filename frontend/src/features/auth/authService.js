@@ -25,6 +25,12 @@ const login = async (userData) => {
   return response.data;
 };
 
+// const getUser=async()=>{
+//   const response= await axios.get(`${API_URL}/me`)
+
+//   return response.data
+// }
+
 const logout = async () => {
   localStorage.removeItem("user");
 };
@@ -32,6 +38,6 @@ const logout = async () => {
 const authService = {
   register,
   logout,
-  login
+  login,
 };
 export default authService;

@@ -5,6 +5,7 @@ import Spinner from "./Spinner";
 
 function DisplayGoals() {
   const { goals, isLoading } = useSelector((state) => state.goal);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const deletehandler = (id) => {
@@ -12,11 +13,9 @@ function DisplayGoals() {
   };
 
   useEffect(() => {
-    // Dispatch the fetchGoals action
     dispatch(fetchGoals());
   }, [dispatch]);
 
-  // Log goals whenever the goals state changes
   useEffect(() => {
     console.log(goals);
   }, [goals]);
@@ -30,14 +29,21 @@ function DisplayGoals() {
       <ul>
         {goals &&
           goals.map((goal) => (
-            <li key={goal._id} className="flex gap-x-4 mt-2 bg-slate-400">
-              <p>{goal.text}</p>
-              <button
-                className="bg-blue-500 text-white px-2"
-                onClick={() => deletehandler(goal._id)}
-              >
-                X
-              </button>
+            <li key={goal._id} className="flex flex-col  mt-2 bg-slate-400">
+              <section className="flex gap-x-4">
+                <p>{goal.text}</p>
+                {user && goal.user === user._id && (
+                  <button
+                    className="bg-red-500 text-white px-2"
+                    onClick={() => deletehandler(goal._id)}
+                  >
+                    X
+                  </button>
+                )}
+              </section>
+              <section>
+                <h2>{new Date(goal.createdAt).toLocaleString()}</h2>
+              </section>
             </li>
           ))}
       </ul>

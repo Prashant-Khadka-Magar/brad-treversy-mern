@@ -15,12 +15,15 @@ function Dashboard() {
     }
   }, [user, navigate]);
 
-  return <div className="flex flex-col items-center">
-    <div className="mt-5">
-      <AddGoals/>
-      <DisplayGoals/>
+  return (
+    <div className="flex flex-col items-center">
+      <div className="mt-5">
+       {user && <h1> {user.name}'s Dashboard</h1>}
+        <AddGoals />
+        <DisplayGoals />
+      </div>
     </div>
-  </div>;
+  );
 }
 
 export default Dashboard;
